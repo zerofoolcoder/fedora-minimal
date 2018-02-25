@@ -81,3 +81,4 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 echo "Done. restarting now, login with your user and type startx"
 read -p "Press enter to continue"
+shutdown -r now
