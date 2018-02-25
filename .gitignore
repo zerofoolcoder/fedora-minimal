@@ -8,4 +8,6 @@ Downloads
 .local
 .serverauth*
 .Xauthority
-.fonts
+.fonts/*
+!.fonts/siji.pcf
+!.fonts/DejaVuSans.ttf
