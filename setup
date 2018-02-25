@@ -70,4 +70,14 @@ rm -rf github
 echo "change bootup theme"
 plymouth-set-default-theme spinfinity -R
 
-echo "Done. Exit root user, login with your user and startx"
+echo "Setting up Grub"
+cp bin/kdmansion.png /boot/grub2/themes/system
+chown root:root /boot/grub2/themes/system/kdmansion.png
+chmod 644 /boot/grub2/themes/system/kdmansion.png
+sed -i '/GRUB_TERMINAL_OUTPUT/s/^/#/' /etc/default/grub
+echo "GRUB_BACKGROUND=\"/boot/grub2/themes/system/kdmansion.png\"" >> /etc/default/grub
+echo "GRUB_GFXMODE=\"800x600\"" >> /etc/default/grub
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+echo "Done. restarting now, login with your user and type startx"
+read -p "Press enter to continue"
