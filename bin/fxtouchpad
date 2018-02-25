@@ -1,0 +1,15 @@
+#!/bin/bash
+
+touchpad=$(xinput list | grep Elantech | awk '{print $6}' | awk -F'=' '{print($2)}')
+
+tapping=$(xinput list-props $touchpad | grep "libinput Tapping Enabled (" | awk -F "[()]" '{print $2}')
+
+scrolling=$(xinput list-props $touchpad | grep "libinput Natural Scrolling Enabled (" | awk -F "[()]" '{print $2}')
+
+
+xinput set-prop "$touchpad" "$tapping" 1
+xinput set-prop "$touchpad" "$scrolling" 1
+
+#echo "${touchpad}"
+#echo "${tapping}"
+#echo "${scrolling}"

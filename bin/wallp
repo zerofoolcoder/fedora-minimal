@@ -1,0 +1,28 @@
+#!/bin/bash
+
+resolutions=()
+
+while read LINE
+do
+	resolutions+=($LINE)
+done <<< $(xrandr -q | grep ' connected ' | grep -o '[0-9]*x[0-9]*+[0-9]*+[0-9]*' | awk -F+ '{print $1}')
+
+resolution="${resolutions[0]}"
+equal=true
+
+for i in "${resolutions[@]}"
+do
+	if [[ "$resolution" != "$i" ]]; then
+		equal=false
+	fi
+
+	resolution="$i"
+done
+
+if [ "$equal" = true ]; then
+	image="$resolution"
+else
+	image=$(IFS=- ; echo "${resolutions[*]}")
+fi
+
+i3lock -t -e -f -i "/usr/local/bin/$image.png"

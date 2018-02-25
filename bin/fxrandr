@@ -1,0 +1,31 @@
+#!/bin/bash
+
+monitors=()
+
+while read LINE
+do
+	monitors+=($LINE)
+done <<< $(xrandr | grep connected | awk '{print $1}')
+
+primary="${monitors[0]}"
+
+for monitor in "${monitors[@]}"
+do
+	if [[ "$primary" != "$monitor" ]]; then
+		status=$(xrandr | grep "$monitor" | awk '{print $2}')
+
+		if [[ "$status" = "connected" ]]; then
+			xrandr --output "$monitor" --auto --right-of "$primary"
+			i3-msg [workspace=2] move workspace to output "$monitor"
+			i3-msg [workspace=4] move workspace to output "$monitor"
+			i3-msg [workspace=6] move workspace to output "$monitor"
+			i3-msg [workspace=8] move workspace to output "$monitor"
+		else
+			xrandr --output "$monitor" --off
+		fi
+	fi
+done
+
+feh --bg-max /usr/local/bin/kdmansion-1920x1080.png
+
+#echo "${monitors[@]}"
