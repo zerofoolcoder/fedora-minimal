@@ -4,15 +4,8 @@
 # Update system
 dnf upgrade --refresh
 
-# Install git
-dnf -y install git
-
 # Install pakages and dependencies
-dnf install xorg-x11-server-Xorg xorg-x11-drv-{evdev,intel,synaptics} xorg-x11-xinit xbacklight i3lock psmisc feh terminus-fonts wget libxcb-devel xcb-util-keysyms-devel xcb-util-devel xcb-util-wm-devel xcb-util-xrm-devel yajl-devel libXrandr-devel startup-notification-devel libev-devel xcb-util-cursor-devel libXinerama-devel libxkbcommon-devel libxkbcommon-x11-devel pcre-devel pango-devel gcc automake tar libXcomposite libXcomposite-devel libXdamage libXdamage-devel libconfig libconfig-devel dbus dbus-devel libdrm-devel libglvnd libglvnd-devel mesa-libGL-devel asciidoc redshift bison bison-devel flex flex-devel librsvg2-devel check-devel xcb-proto jsoncpp jsoncpp-devel wireless-tools wireless-tools-devel cmake @development-tools gcc-c++ i3-ipc alsa-lib-devel pulseaudio-libs-devel libmpdclient-devel libcurl-devel plymouth-theme-spinfinity
-
-# Setup git folder
-cd ~
-mkdir github
+dnf install -y xorg-x11-server-Xorg xorg-x11-drv-{evdev,intel,synaptics} xorg-x11-xinit xbacklight i3lock psmisc feh terminus-fonts wget libxcb-devel xcb-util-keysyms-devel xcb-util-devel xcb-util-wm-devel xcb-util-xrm-devel yajl-devel libXrandr-devel startup-notification-devel libev-devel xcb-util-cursor-devel libXinerama-devel libxkbcommon-devel libxkbcommon-x11-devel pcre-devel pango-devel gcc automake tar libXcomposite libXcomposite-devel libXdamage libXdamage-devel libconfig libconfig-devel dbus dbus-devel libdrm-devel libglvnd libglvnd-devel mesa-libGL-devel asciidoc redshift bison bison-devel flex flex-devel librsvg2-devel check-devel xcb-proto jsoncpp jsoncpp-devel wireless-tools wireless-tools-devel cmake @development-tools gcc-c++ i3-ipc alsa-lib-devel pulseaudio-libs-devel libmpdclient-devel libcurl-devel plymouth-theme-spinfinity
 
 # Install i3-gaps
 cd ~/github
