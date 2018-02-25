@@ -15,8 +15,7 @@ runuser -l $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $1}') -c 'git 
 runuser -l $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $1}') -c 'git pull https://github.com/zerofoolcoder/fedora-minimal'
 
 cd bin
-find . -type f ! -name "*.*" -exec chmod 755 {} \;
-find . -type f ! -name "*.*" -exec cp {} /usr/local/bin \;
+cp * /usr/local/bin
 chown -R root:root /usr/local/bin
 cd ..
 
