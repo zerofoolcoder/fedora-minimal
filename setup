@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Login as Root
-# Update system
+echo "Updating system"
 dnf upgrade --refresh
 
-# Install pakages and dependencies
+echo "Install pakages and dependencies"
 dnf install -y xorg-x11-server-Xorg xorg-x11-drv-{evdev,intel,synaptics} xorg-x11-xinit xbacklight i3lock psmisc feh terminus-fonts wget libxcb-devel xcb-util-keysyms-devel xcb-util-devel xcb-util-wm-devel xcb-util-xrm-devel yajl-devel libXrandr-devel startup-notification-devel libev-devel xcb-util-cursor-devel libXinerama-devel libxkbcommon-devel libxkbcommon-x11-devel pcre-devel pango-devel gcc automake tar libXcomposite libXcomposite-devel libXdamage libXdamage-devel libconfig libconfig-devel dbus dbus-devel libdrm-devel libglvnd libglvnd-devel mesa-libGL-devel asciidoc redshift bison bison-devel flex flex-devel librsvg2-devel check-devel xcb-proto jsoncpp jsoncpp-devel wireless-tools wireless-tools-devel cmake @development-tools gcc-c++ i3-ipc alsa-lib-devel pulseaudio-libs-devel libmpdclient-devel libcurl-devel plymouth-theme-spinfinity
 
-# Install i3-gaps
+echo "Installing i3-gaps"
 cd ~/github
 git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps
@@ -18,7 +18,7 @@ mkdir -p build && cd build/
 make
 sudo make install
 
-# Instalar compton
+echo "Installing compton"
 cd ~/github
 git clone https://github.com/chjj/compton compton
 cd compton
@@ -26,7 +26,7 @@ make
 make docs
 make install
 
-# Instalar rofi
+echo "Installing rofi"
 cd ~/github
 git clone https://github.com/DaveDavenport/rofi rofi
 cd rofi/
@@ -38,7 +38,7 @@ cd build
 make
 make install
 
-# Install polybar
+echo "Installing polybar"
 cd ~/github
 git clone --recursive https://github.com/jaagr/polybar polybar
 mkdir polybar/build
@@ -46,10 +46,13 @@ cd polybar/build
 cmake ..
 sudo make install
 
-# change bootup theme
+echo "change bootup theme"
 plymouth-set-default-theme spinfinity -R
 
-# get config files
+echo "get config files"
 cd $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $6}')
 runuser -l $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $1}') -c 'git init'
 runuser -l $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $1}') -c 'git pull https://github.com/zerofoolcoder/fedora-minimal'
+cd bin
+mv * /usr/local/bin
+cd ..
