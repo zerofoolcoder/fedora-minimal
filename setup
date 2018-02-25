@@ -48,3 +48,8 @@ sudo make install
 
 # change bootup theme
 plymouth-set-default-theme spinfinity -R
+
+# get config files
+cd $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $6}')
+runuser -l $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $1}') -c 'git init'
+runuser -l $(cat /etc/passwd | grep 1000:1000 | awk -F":" '{print $1}') -c 'git pull https://github.com/zerofoolcoder/fedora-minimal'
