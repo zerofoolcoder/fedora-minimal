@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Login as Root
+# Must be logged in as Root
 echo "Updating system"
 dnf upgrade --refresh
 
-echo "Install pakages and dependencies"
-dnf install -y xorg-x11-server-Xorg xorg-x11-drv-{evdev,intel,synaptics} xorg-x11-xinit xbacklight i3lock psmisc feh terminus-fonts wget libxcb-devel xcb-util-keysyms-devel xcb-util-devel xcb-util-wm-devel xcb-util-xrm-devel yajl-devel libXrandr-devel startup-notification-devel libev-devel xcb-util-cursor-devel libXinerama-devel libxkbcommon-devel libxkbcommon-x11-devel pcre-devel pango-devel gcc automake tar libXcomposite libXcomposite-devel libXdamage libXdamage-devel libconfig libconfig-devel dbus dbus-devel libdrm-devel libglvnd libglvnd-devel mesa-libGL-devel asciidoc redshift bison bison-devel flex flex-devel librsvg2-devel check-devel xcb-proto jsoncpp jsoncpp-devel wireless-tools wireless-tools-devel cmake @development-tools gcc-c++ i3-ipc alsa-lib-devel pulseaudio-libs-devel libmpdclient-devel libcurl-devel plymouth-theme-spinfinity
+echo "Installing pakages and dependencies"
+dnf install -y xorg-x11-server-Xorg xorg-x11-drv-{evdev,intel,synaptics} xorg-x11-xinit xbacklight i3lock psmisc feh terminus-fonts wget libxcb-devel xcb-util-keysyms-devel xcb-util-devel xcb-util-wm-devel xcb-util-xrm-devel yajl-devel libXrandr-devel startup-notification-devel libev-devel xcb-util-cursor-devel libXinerama-devel libxkbcommon-devel libxkbcommon-x11-devel pcre-devel pango-devel gcc automake tar libXcomposite libXcomposite-devel libXdamage libXdamage-devel libconfig libconfig-devel dbus dbus-devel libdrm-devel libglvnd libglvnd-devel mesa-libGL-devel asciidoc redshift bison bison-devel flex flex-devel librsvg2-devel check-devel xcb-proto jsoncpp jsoncpp-devel wireless-tools wireless-tools-devel cmake @development-tools gcc-c++ i3-ipc alsa-lib-devel pulseaudio-libs-devel libmpdclient-devel libcurl-devel plymouth-theme-spinfinity htop
 
 echo "Installing i3-gaps"
+mkdir -p ~/github
 cd ~/github
 git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps
@@ -17,6 +18,7 @@ mkdir -p build && cd build/
 ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
 make
 sudo make install
+rm -rf ~/github/i3-gaps
 
 echo "Installing compton"
 cd ~/github
@@ -25,6 +27,7 @@ cd compton
 make
 make docs
 make install
+rm -rf ~/github/compton
 
 echo "Installing rofi"
 cd ~/github
@@ -37,6 +40,7 @@ cd build
 ../configure
 make
 make install
+rm -rf ~/github/rofi
 
 echo "Installing polybar"
 cd ~/github
@@ -45,6 +49,7 @@ mkdir polybar/build
 cd polybar/build
 cmake ..
 sudo make install
+rm -rf ~/github/polybar
 
 echo "change bootup theme"
 plymouth-set-default-theme spinfinity -R
